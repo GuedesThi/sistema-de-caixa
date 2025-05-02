@@ -1,103 +1,58 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import HabilitarOperadorComponent from "./components/HabilitarOperador";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // estado para saber se uma tecla foi pressionada (true) ou não (false);
+  const [buttonPress, setButtonPress] = useState<boolean>(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  // 'function' que será executada sempre que um 'event keydown' for acionado;
+  // ela vê que tecla foi clicada e faz algo de acordo com isso;
+  const ifAnyKeyIsPress = (event: KeyboardEvent) => {
+    // se o usuário escolheu a opção '1' eu mudo o estado para 'true', mostrando uma outra tela;
+    if (event.key === "1") {
+      setButtonPress(true);
+    }
+    // se o usuário escolheu a opção 'Esc' eu mudo o estado para 'false', fechando uma tela;
+    if (event.key === "Escape") {
+      setButtonPress(false);
+    }
+  };
+
+  // abre um 'addEventListener' para ficar de olho se o usuário clico numa tecla;
+  // quando o usuário sair da página (por causa do '[]' no final) o 'event' é fechado;
+  useEffect(() => {
+    // se uma tecla é pressionada rodamos a 'function ifAnyKeyIsPress';
+    window.addEventListener("keydown", ifAnyKeyIsPress);
+    return () => {
+      // fechamos o 'event' (processo de Cleanup Function) que espera uma tecla ser pressionada;
+      window.removeEventListener("keydown", ifAnyKeyIsPress);
+    };
+  }, []);
+
+  return (
+    <div className="w-screen h-screen bg-red-700 flex justify-center items-center">
+      <div className="w-[70rem] h-[30rem] bg-white flex justify-center items-center">
+        <main className="flex flex-col gap-[1rem] justify-center items-center">
+          <h1 className="text-[2.5rem] font-light">Caixa sem Operador</h1>
+          <h2 className="text-[2.3rem] font-light mb-[2rem]">
+            Fiscal deve escolher uma das opções abaixo
+          </h2>
+          <ol className="w-[26rem] flex justify-between">
+            <li className="bg-red-700 text-gray-100 font-normal px-[20px] py-[18px]">
+              1 - Habilitar Operador
+            </li>
+            <li className="bg-red-700 text-gray-100 font-normal pt-[20px] pb-[20px] pl-[18px] pr-[18px]">
+              2 - Ver registros
+            </li>
+          </ol>
+        </main>
+      </div>
+      {/* Fazemos um Short-circuit conditional rendering */}
+      {/* Isso significa, renderizar um componente com base numa condicional curta (sem uso do if/else) */}
+      {/* Nessa situação, se 'buttonPress = true' renderizamos o componente 'HabilitarOperador' */}
+      {buttonPress && <HabilitarOperadorComponent />}
     </div>
   );
 }
