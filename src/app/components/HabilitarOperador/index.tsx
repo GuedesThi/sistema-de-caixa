@@ -7,15 +7,22 @@ export default function HabilitarOperadorComponent() {
     // z-50 = ficar por cima de qualquer outro elemento;
     // bg-black/50 = fundo preto, 50% de opacidade;
     <div className="fixed inset-0 z-50 bg-black/50 flex justify-center items-center">
-      <div className="bg-white shadow-2xl px-16 py-12 flex flex-col gap-[30px] justify-center items-center">
-        <p>Autentificação do Fiscal</p>
-        <p className="font-light text-[2rem]">Fiscal</p>
-        <p>utilize o leitor óptico para identificar seu prontuário.</p>
-        <input
-          className="bg-gray-500 px-[15px] py-[22px] text-white border-2 border-gray-500 focus:border-pink-600"
-          type="text"
-          placeholder="ex: 1139504"
-        />
+      <div className="bg-red-800 shadow-2xl px-8 py-8 flex flex-col gap-[90px] justify-center items-start">
+        <p className="text-white font-medium">Autenticação do Fiscal</p>
+        <div className="flex flex-col justify-center items-center text-center">
+          <p className="text-[2rem] text-white font-medium">🪪Fiscal</p>
+          <p className="text-white font-normal w-[60%] text-[1rem]">
+            utilize o leitor óptico para identificar seu prontuário
+          </p>
+        </div>
+
+        <div className="flex justify-center items-center w-full">
+          <input
+            className="bg-gray-500 px-[15px] py-[22px] text-white border-2 border-gray-500 focus:border-pink-600"
+            type="text"
+            placeholder="ex: 1139504"
+          />
+        </div>
       </div>
     </div>
   );
