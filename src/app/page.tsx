@@ -18,8 +18,6 @@ export default function Home() {
       // se o usuário escolheu a opção 'Esc' eu mudo o estado para 'false', fechando uma tela;
       case "Escape":
         setButtonPress(false);
-      default:
-        setButtonPress(false);
         break;
     }
   };
