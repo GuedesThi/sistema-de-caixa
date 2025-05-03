@@ -10,13 +10,17 @@ export default function Home() {
   // 'function' que será executada sempre que um 'event keydown' for acionado;
   // ela vê que tecla foi clicada e faz algo de acordo com isso;
   const ifAnyKeyIsPress = (event: KeyboardEvent) => {
-    // se o usuário escolheu a opção '1' eu mudo o estado para 'true', mostrando uma outra tela;
-    if (event.key === "1") {
-      setButtonPress(true);
-    }
-    // se o usuário escolheu a opção 'Esc' eu mudo o estado para 'false', fechando uma tela;
-    if (event.key === "Escape") {
-      setButtonPress(false);
+    switch (event.key) {
+      // se o usuário escolheu a opção '1' eu mudo o estado para 'true', mostrando uma outra tela;
+      case "1":
+        setButtonPress(true);
+        break;
+      // se o usuário escolheu a opção 'Esc' eu mudo o estado para 'false', fechando uma tela;
+      case "Escape":
+        setButtonPress(false);
+      default:
+        setButtonPress(false);
+        break;
     }
   };
 
